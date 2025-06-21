@@ -11,10 +11,11 @@ func main() {
 	 fmt.Scan(&name)
 	 fmt.Printf("Hello, %s! Let's begin the quiz.\n", name)
 	 fmt.Printf("Enter your age:")
-	 var age int
+	 var age uint
+	 var num_question int = 3
 	 fmt.Scan(&age)
 	 if age < 10 {
-		 fmt.Println("You must be at least 18 years old to play this game.")
+		 fmt.Println("You must be at least 18 years old to play this game.") 
 		 return
 	 }
 	 fmt.Println("Great! Let's start the quiz.")
@@ -63,6 +64,8 @@ func main() {
 	 }
 	 // Display the final score
 	 fmt.Printf("Quiz over! Your final score is: %d out of 3\n", score)
+	 percent := (float64(score)/ float64(num_question))* 100
+	 fmt.Printf("Your score percentage is: %v%%. \n", percent)
 	 // Provide feedback based on the score
 	 if score == 3 {
 		 fmt.Println("Excellent job! You're a quiz master!")
