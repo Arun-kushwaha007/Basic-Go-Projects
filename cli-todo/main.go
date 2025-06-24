@@ -4,7 +4,7 @@ package main
 import (
 	"fmt"
 	"os"
-	// "strconv"
+	"strconv"
 	"github.com/Arun-kushwaha007/Basic-Go-Projects/tree/main/cli-todo/todo"
 )
 
@@ -62,6 +62,52 @@ func main() {
 		// Otherwise, loops through each task:
 		// If the task is done, status is "x"; otherwise, it's a blank space.
 		// Prints each task with its number, completion status, and description.
+
+
+
+
+		case "done":
+			if len(args) < 2 {
+				fmt.Println("Usage: done <task number>")
+				return
+			}
+			index, err := strconv.Atoi(args[1])
+			if err != nil || index < 1 {
+				fmt.Println("Invalid task number")
+				return
+			}
+			tasks, _ := todo.LoadTasks()
+			if index > len(tasks) {
+				fmt.Println("Task number out of range")
+				return
+			}
+			tasks[index-1].Done = true
+			todo.SaveTasks(tasks)
+			fmt.Printf("Marked task %d as done.\n", index)
+		
+
+
+			
+			case "delete":
+				if len(args) < 2 {
+					fmt.Println("Usage: delete <task number>")
+					return
+				}
+				index, err := strconv.Atoi(args[1])
+				if err != nil || index < 1 {
+					fmt.Println("Invalid task number")
+					return
+				}
+				tasks, _ := todo.LoadTasks()
+				if index > len(tasks) {
+					fmt.Println("Task number out of range")
+					return
+				}
+				tasks = append(tasks[:index-1], tasks[index:]...)
+				todo.SaveTasks(tasks)
+				fmt.Printf("Deleted task %d.\n", index)
+			
+
 
 
 	default:
